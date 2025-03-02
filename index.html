@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Чат с Мистралом</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Подключаем библиотеку marked.js -->
   <style>
     * {
       margin: 0;
@@ -20,6 +21,7 @@
       height: 100vh;
       flex-direction: column;
       text-align: center;
+      overflow: hidden;
     }
 
     h1 {
@@ -30,16 +32,18 @@
 
     #chatBox {
       width: 100%;
-      max-width: 600px;
-      height: 400px;
+      height: 100%;
+      max-width: 800px;
+      background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
-      background: rgba(0, 0, 0, 0.6); /* Прозрачный фон с темным оттенком */
-      padding: 15px;
+      padding: 20px;
       overflow-y: auto;
-      margin-bottom: 20px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-      text-align: left;
       font-size: 16px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
     .chat-message {
@@ -47,6 +51,7 @@
       padding: 12px;
       border-radius: 8px;
       font-size: 18px;
+      word-wrap: break-word;
     }
 
     .user-message {
@@ -69,8 +74,16 @@
       background-color: rgba(255, 255, 255, 0.1);
       color: #fff;
       font-size: 16px;
-      margin-bottom: 20px;
+      margin-top: 20px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+      transition: height 0.3s ease;
+      min-height: 40px;
+    }
+
+    #userInput:focus {
+      height: 120px; /* Увеличиваем поле при фокусе */
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
     }
 
     #sendButton {
@@ -82,6 +95,7 @@
       cursor: pointer;
       font-size: 18px;
       transition: background-color 0.3s;
+      margin-top: 10px;
     }
 
     #sendButton:hover {
@@ -105,9 +119,6 @@
     }
 
     @media (max-width: 768px) {
-      #chatBox {
-        height: 300px;
-      }
       h1 {
         font-size: 28px;
       }
@@ -140,7 +151,7 @@
       const chatBox = document.getElementById('chatBox');
       chatBox.innerHTML += `
         <div class="chat-message user-message">
-          ${userMessage}
+          ${marked(userMessage)} <!-- Рендерим Markdown с помощью библиотеки marked.js -->
         </div>
       `;
 
@@ -167,7 +178,7 @@
         // Показываем ответ бота в чате
         chatBox.innerHTML += `
           <div class="chat-message bot-message">
-            ${botReply}
+            ${marked(botReply)} <!-- Рендерим Markdown с помощью библиотеки marked.js -->
           </div>
         `;
         chatBox.scrollTop = chatBox.scrollHeight;  // Прокручиваем вниз
@@ -177,7 +188,7 @@
         const chatBox = document.getElementById('chatBox');
         chatBox.innerHTML += `
           <div class="chat-message bot-message">
-            ${botReply}
+            ${marked(botReply)} <!-- Рендерим Markdown с помощью библиотеки marked.js -->
           </div>
         `;
       }
@@ -215,4 +226,3 @@
   </script>
 </body>
 </html>
-
