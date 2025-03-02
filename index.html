@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мистрал AI Chatbot</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="chat-container">
+    <header>
+      <h1>Мистрал AI Chatbot</h1>
+      <p>Задай свой вопрос!</p>
+    </header>
+
+    <div class="chat-box" id="chatBox">
+      <div class="chat-message bot-message">
+        Привет! Как я могу помочь?
+      </div>
+    </div>
+
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Введите сообщение..." />
+      <button onclick="sendMessage()">Отправить</button>
+      <button onclick="speakMessage()">Озвучить</button>
+    </div>
+
+    <div class="footer">
+      <p>Powered by Мистрал AI</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
